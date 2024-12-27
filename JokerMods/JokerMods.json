@@ -1,0 +1,13 @@
+{
+    "id": "JOMODS",
+    "name": "Joker Mods",
+    "author": ["drAdrian9"],
+    "description": "A trial mods, first one is a mods to add joker cards that give 100 multiplier.",
+    "prefix": "jmod",
+    "main_file": "JokerMods.lua",
+    "badge_colour": "#f34581",
+    "dependencies": [
+        "Steamodded (>=1.0.0~ALPHA-1225a)"
+    ],
+    "version": "1.0.0"
+}
