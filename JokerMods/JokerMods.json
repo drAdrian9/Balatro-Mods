@@ -7,7 +7,7 @@
     "main_file": "JokerMods.lua",
     "badge_colour": "#f34581",
     "dependencies": [
-        "Steamodded (>=1.0.0~ALPHA-1225a)"
+        "Steamodded (>=1.0.0~ALPHA-1224e)"
     ],
     "version": "1.0.0"
 }
