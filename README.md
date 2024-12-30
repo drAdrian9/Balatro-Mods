@@ -1,6 +1,5 @@
 # Balatro-Mods
-Just a collection of mods made by me to enhance the experiences when playing Balatro (YOU CAN WIN EASILY!)
-
+Just a collection of mods made by me to enhance the experiences when playing Balatro
 --How to Download & Apply Mods
 !!Use Steammodded!!
 
