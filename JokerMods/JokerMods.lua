@@ -5,36 +5,52 @@ SMODS.Atlas {
     py = 95
 }
 
+
 SMODS.Joker {
     key = 'mult-fest',
     loc_txt = {
         name = 'Mult Fest',
         text = {
-            "+1000 Mult when used",
+            "+100 Mult when used",
             "{C:mult}+#1# {} Mult",
-            "{C:red}X1000{} Mult", 
             "{C:inactive}Out of luck, eh?"
         }
     },
-    config = { extra = { mult = 1000 }},
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult } }
-    end,
-    rarity = 5, --1 for testing purposes
+    config = { extra = { mult = 100, odds = 20 }},
+    rarity = 3,
     atlas = 'JokerMods',
-    pos = { x = 0, y = 0 },
-    cost = 10, --1 for testing purposes
-    unlocked = true,
-    discovered = true,
-    blueprint_compability = true,
-    external_compability = true,
+    pos = { x = 2, y = 1 },
+    cost = 10,
+    eternal_compat = false, -- Gros Michel is incompatible with the eternal sticker
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult, (G.GAME.probabilities.normal or 1), card.ability.extra.odds } }
+    end,
     calculate = function(self, card, context)
         if context.joker_main then
-            local chance = math.random(1, 10) -- Generate a random number between 1 and 10
-            if chance == 1 then
+            return {
+                mult_mod = card.ability.extra.mult,
+                message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } }
+            }
+        end
+
+        -- Checks to see if it's end of round, and if context.game_over is false.
+        -- Also, not context.repetition ensures it doesn't get called during repetitions.
+        if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
+            -- Another pseudorandom thing, randomly generates a decimal between 0 and 1, so effectively a random percentage.
+            if pseudorandom('mult-fest') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                -- This part plays the animation.
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('tarot1')
+                        card.T.r = -0.2
+                        card:juice_up(0.3, 0.4)
+                        card.states.drag.is = true
+                        card.children.center.pinch.x = true
+                    end
+                }))
                 return {
-                    mult_mod = card.ability.extra.mult,
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } }
+                    mult_mod = card.ability.extra.mult * 100,
+                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult * 100 } }
                 }
             else
                 return {
