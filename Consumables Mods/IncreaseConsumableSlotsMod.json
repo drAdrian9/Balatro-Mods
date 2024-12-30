@@ -1,0 +1,13 @@
+{
+    "id": "CMODS",
+    "name": "Consumables Mods",
+    "author": ["drAdrian9"],
+    "description": "A trial mods, first one is a mods to add joker cards that give 100 multiplier.",
+    "prefix": "cmod",
+    "main_file": "IncreaseConsumableSlots.lua",
+    "badge_colour": "#f34582",
+    "dependencies": [
+        "Steamodded (>=1.0.0~ALPHA-1224e)"
+    ],
+    "version": "1.0.0"
+}
