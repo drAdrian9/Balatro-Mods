@@ -46,5 +46,50 @@ SMODS.Joker {
     end
 }
 
+SMODS.Joker {
+    key = 'mult_fest_v2',
+    loc_txt = 
+    {
+        name = "Mult Fest V2",
+        text = 
+        {
+            "{C:green}#1# in #2#{} chance to gains",
+            "{C:mult}+#4#{} mult",
+            "{C:inactive}(currently {C:mult}+#3#{C:inactive} mult)"
+        }
+    },
+    config = {extra = {mult_gain = 1000, mult = 0, odds = 10} },
+    rarity = 3,
+    atlas = 'JokerMods',
+    pos = { x = 0, y = 0 },
+    cost = 5,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { (G.GAME.probabilities.normal or 1), card.ability.extra.odds, card.ability.extra.mult, card.ability.extra.mult_gain } }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                mult_mod = card.ability.extra.mult,
+                message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } },
+                colour = G.C.MULT
+            }
+        end
+        if context.before and not context.blueprint then 
+            if pseudorandom('mult_fest_v2') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
+                return {
+                    message = 'Upgrade!',
+                    colour = G.C.MULT, 
+                    card = card
+                }
+            else
+                return {
+                    message = 'Out of luck, eh?'
+                }
+            end
+        end
+    end -- End calculate
+}
+
 ----------------------------------------------
 ------------MOD CODE END----------------------
