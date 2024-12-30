@@ -19,9 +19,12 @@ SMODS.Joker {
     config = { extra = { mult = 100, odds = 20 }},
     rarity = 3,
     atlas = 'JokerMods',
-    pos = { x = 2, y = 1 },
+    pos = { x = 0, y = 0 },
     cost = 10,
-    eternal_compat = false, -- Gros Michel is incompatible with the eternal sticker
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,                            --does joker work with blueprint
+    eternal_compat = true,                              --can joker be eternal
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, (G.GAME.probabilities.normal or 1), card.ability.extra.odds } }
     end,
