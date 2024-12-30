@@ -63,24 +63,29 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-    key = 'mult_fest_v2',
+    key = 'slot_machine',
     loc_txt = 
     {
-        name = "Mult Fest V2",
+        name = "Slot Machine",
         text = 
         {
-            "{C:green}#1# in #2#{} chance to gains",
-            "{C:mult}+#4#{} mult",
+            "{C:green}#1# in #2#{} chance to gains {C:mult}+#4#{} mult.",
+            "if it fails, lose {C:mult}-#5#{} mult instead",
             "{C:inactive}(currently {C:mult}+#3#{C:inactive} mult)"
         }
     },
-    config = {extra = {mult_gain = 1000, mult = 0, odds = 10} },
+    config = {extra = {mult_gain = 15, mult_loss = 1, mult = 10, odds = 10} },
     rarity = 3,
     atlas = 'JokerMods',
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 0 },
     cost = 5,
     loc_vars = function(self, info_queue, card)
-        return { vars = { (G.GAME.probabilities.normal or 1), card.ability.extra.odds, card.ability.extra.mult, card.ability.extra.mult_gain } }
+        return { vars = { 
+            (G.GAME.probabilities.normal or 1), 
+            card.ability.extra.odds, 
+            card.ability.extra.mult, 
+            card.ability.extra.mult_gain, 
+            card.ability.extra.mult_loss } }
     end,
     calculate = function(self, card, context)
         if context.joker_main then
@@ -90,6 +95,7 @@ SMODS.Joker {
                 colour = G.C.MULT
             }
         end
+
         if context.before and not context.blueprint then 
             if pseudorandom('mult_fest_v2') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
@@ -99,8 +105,11 @@ SMODS.Joker {
                     card = card
                 }
             else
+                card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_loss
                 return {
-                    message = 'Out of luck, eh?'
+                    message = 'Out of luck, eh?',
+                    colour = G.C.MULT, 
+                    card = card
                 }
             end
         end
