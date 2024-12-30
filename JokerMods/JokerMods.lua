@@ -78,10 +78,14 @@ SMODS.Joker {
         }
     },
     config = {extra = {mult_gain = 15, mult_loss = 1, mult = 10, odds = 10} },
-    rarity = 3,
+    rarity = 2,
+    cost = 5,
     atlas = 'JokerMods',
     pos = { x = 1, y = 0 },
-    cost = 5,
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,                            --does joker work with blueprint
+    eternal_compat = false,
     loc_vars = function(self, info_queue, card)
         return { vars = { 
             (G.GAME.probabilities.normal or 1), 
@@ -101,13 +105,14 @@ SMODS.Joker {
 
         if context.before and not context.blueprint then 
             if pseudorandom('mult_fest_v2') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                -- add mult
                 card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
                 return {
                     message = 'Upgrade!',
                     colour = G.C.MULT, 
                     card = card
                 }
-            else
+            else -- reduce mult
                 card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_loss
                 return {
                     message = 'Out of luck, eh?',
