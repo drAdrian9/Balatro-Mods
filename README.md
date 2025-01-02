@@ -11,4 +11,4 @@ Just a collection of mods made by drAdrian9 and AgengCDB to enhance the experien
 6. Enjoy!!
 
 --Future works
-To view our future mods ideas you can see it here [Google Sheets]([https://pages.github.com/](https://docs.google.com/spreadsheets/d/1Mi7xT8lYOv5ZCe2R_0Z61TS0ZkYtsUqlNYcqMXPs9EI/edit?usp=sharing))
+To view our future mods ideas you can see it here [Google Sheets](https://docs.google.com/spreadsheets/d/1Mi7xT8lYOv5ZCe2R_0Z61TS0ZkYtsUqlNYcqMXPs9EI/edit?usp=sharing)
