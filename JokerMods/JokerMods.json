@@ -2,7 +2,7 @@
     "id": "JOMODS",
     "name": "Joker Mods",
     "author": ["drAdrian9", "DeathDB"],
-    "description": "A trial mods, first one is a mods to add joker cards that give 100 multiplier.",
+    "description": "A mod to add joker cards that give 100 multiplier with the probability 1/10.",
     "prefix": "jmod",
     "main_file": "JokerMods.lua",
     "badge_colour": "#f34581",
