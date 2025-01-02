@@ -7,7 +7,7 @@
     "main_file": "IncreaseCardinHandCapacity.lua",
     "badge_colour": "#f34583",
     "dependencies": [
-        "Steamodded (>=1.0.0~ALPHA-1220e)"
+        "Steamodded (>=1.0.0~ALPHA-1220a)"
     ],
     "version": "1.0.0"
 }
