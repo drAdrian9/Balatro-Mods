@@ -2,7 +2,7 @@
     "id": "CMODS",
     "name": "Consumables Mods",
     "author": ["drAdrian9"],
-    "description": "A trial mods, first one is a mods to add joker cards that give 100 multiplier.",
+    "description": "A mods that increase the consumable(Tarot/Planet Cards) slots from 2 to 5.",
     "prefix": "cmod",
     "main_file": "IncreaseConsumableSlots.lua",
     "badge_colour": "#f34582",
