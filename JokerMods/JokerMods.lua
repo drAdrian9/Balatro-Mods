@@ -11,12 +11,11 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mult Fest',
         text = {
-            "+100 Mult when used",
-            "{C:mult}+#1# {} Mult",
-            "{C:inactive}Out of luck, eh?"
+            "{C:green}#2# in #3#{} chance to grant {X:mult,C:white} X#4# {} Mult.",
+            "Grants {C:mult}+#1#{} mult instead if it fails."
         }
     },
-    config = { extra = { mult = 100, odds = 20 }},
+    config = { extra = { mult = 1, Xmult = 10, odds = 5}},
     rarity = 3,
     atlas = 'JokerMods',
     pos = { x = 0, y = 0 },
@@ -26,7 +25,7 @@ SMODS.Joker {
     blueprint_compat = true,                            --does joker work with blueprint
     eternal_compat = true,                              --can joker be eternal
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult, (G.GAME.probabilities.normal or 1), card.ability.extra.odds } }
+        return { vars = { card.ability.extra.mult, (G.GAME.probabilities.normal or 1), card.ability.extra.odds, card.ability.extra.Xmult } }
     end,
     calculate = function(self, card, context)
         if context.joker_main then
@@ -52,13 +51,13 @@ SMODS.Joker {
                     end
                 }))
                 return {
-                    mult_mod = card.ability.extra.mult * 100,
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult * 100 } }
+                    Xmult_mod = card.ability.extra.Xmult,
+                    message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.Xmult } }
                 }
             else
                 return {
-                    mult_mod = 0,
-                    message = localize { type = 'variable', key = 'no_mult', vars = {} }
+                    mult_mod = card.ability.extra.mult,
+                    message = localize { type = 'variable', key = 'no_mult', vars = {card.ability.extra.mult} }
                 }
             end
         end
