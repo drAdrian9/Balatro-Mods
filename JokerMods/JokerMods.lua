@@ -104,7 +104,7 @@ SMODS.Joker {
         end
 
         if context.before and not context.blueprint then 
-            if pseudorandom('mult_fest_v2') < G.GAME.probabilities.normal / card.ability.extra.odds then
+            if pseudorandom('slot_machine') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 -- add mult
                 card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
                 return {
