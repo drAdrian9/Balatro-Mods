@@ -1,0 +1,13 @@
+{
+    "id": "CIH",
+    "name": "Increase Card in Hand Mods",
+    "author": ["drAdrian9"],
+    "description": "A trial mod to increase card in hand from 8 to 10 cards",
+    "prefix": "cih",
+    "main_file": "IncreaseCardinHandCapacity.lua",
+    "badge_colour": "#f34583",
+    "dependencies": [
+        "Steamodded (>=1.0.0~ALPHA-1224e)"
+    ],
+    "version": "1.0.0"
+}
