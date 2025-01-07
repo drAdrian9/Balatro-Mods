@@ -28,7 +28,7 @@ SMODS.Joker {
         return { vars = { card.ability.extra.mult, (G.GAME.probabilities.normal or 1), card.ability.extra.odds, card.ability.extra.Xmult } }
     end,
     calculate = function(self, card, context)
-        if context.joker_main and context.cardarea = G.jokers then
+        if context.joker_main then
             -- Another pseudorandom thing, randomly generates a decimal between 0 and 1, so effectively a random percentage.
             if pseudorandom('mult-fest') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 return {
@@ -83,7 +83,7 @@ SMODS.Joker {
             }
         end
 
-        if context.before and context.cardarea = G.jokers and not context.blueprint then 
+        if context.before and not context.blueprint then 
             if pseudorandom('slot_machine') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 -- add mult
                 card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
