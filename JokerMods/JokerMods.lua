@@ -115,7 +115,7 @@ SMODS.Joker {
             "to be enhanced into a gold card."
         }
     },
-    config = {extra = {odds = 2} },
+    config = {extra = {odds = 9} },
     rarity = 3,
     cost = 6,
     atlas = 'JokerMods',
@@ -126,14 +126,14 @@ SMODS.Joker {
     eternal_compat = true,
     loc_vars = function(self, info_queue, card)
         return { vars = { 
-            (G.GAME.probabilities.normal or 1), 
+            (7*G.GAME.probabilities.normal or 1), 
             card.ability.extra.odds} }
     end,
     calculate = function(self, card, context)
         -- * 1st method. Do not delete this code, m8 be useful for other joker idea
         -- if context.before then
         --     for i=1, #context.scoring_hand do
-        --         if pseudorandom('midas_factor') < G.GAME.probabilities.normal / card.ability.extra.odds then
+        --         if pseudorandom('midas_factor') < (7*G.GAME.probabilities.normal) / card.ability.extra.odds then
         --             G.E_MANAGER:add_event(Event({
         --                 func = function()
         --                     context.scoring_hand[i]:set_ability(G.P_CENTERS.m_gold)
@@ -152,11 +152,11 @@ SMODS.Joker {
 
         -- * better method
         if context.cardarea == G.play then
-            if pseudorandom('midas_factor') < G.GAME.probabilities.normal / card.ability.extra.odds then
+            if pseudorandom('midas_factor') < (7*G.GAME.probabilities.normal) / card.ability.extra.odds then
                 G.E_MANAGER:add_event(Event({
                     func = function()
-                        context.other_card:set_ability(G.P_CENTERS.m_gold)
                         context.other_card:juice_up()
+                        context.other_card:set_ability(G.P_CENTERS.m_gold)
                         return true
                     end
                 })) 
