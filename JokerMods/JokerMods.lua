@@ -104,5 +104,71 @@ SMODS.Joker {
     end -- End calculate
 }
 
+SMODS.Joker {
+    key = 'midas_factor',
+    loc_txt = 
+    {
+        name = "Midas Factor",
+        text = 
+        {
+            "Each played card has {C:green}#1# in #2#{} chance",
+            "to be enhanced into a gold card."
+        }
+    },
+    config = {extra = {odds = 2} },
+    rarity = 3,
+    cost = 6,
+    atlas = 'JokerMods',
+    pos = { x = 3, y = 0 },
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = false,                            --does joker work with blueprint
+    eternal_compat = true,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { 
+            (G.GAME.probabilities.normal or 1), 
+            card.ability.extra.odds} }
+    end,
+    calculate = function(self, card, context)
+        -- * 1st method. Do not delete this code, m8 be useful for other joker idea
+        -- if context.before then
+        --     for i=1, #context.scoring_hand do
+        --         if pseudorandom('midas_factor') < G.GAME.probabilities.normal / card.ability.extra.odds then
+        --             G.E_MANAGER:add_event(Event({
+        --                 func = function()
+        --                     context.scoring_hand[i]:set_ability(G.P_CENTERS.m_gold)
+        --                     context.scoring_hand[i]:juice_up()
+        --                     return true
+        --                 end
+        --             })) 
+        --             return {
+        --                 message = localize('k_gold'),
+        --                 colour = G.C.MONEY,
+        --                 card = card
+        --             }
+        --         end
+        --     end
+        -- end
+
+        -- * better method
+        if context.cardarea == G.play then
+            if pseudorandom('midas_factor') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        context.other_card:set_ability(G.P_CENTERS.m_gold)
+                        context.other_card:juice_up()
+                        return true
+                    end
+                })) 
+                return {
+                    message = localize('k_gold'),
+                    colour = G.C.MONEY,
+                    card = card
+                }
+            end
+        end
+    end
+}
+
 ----------------------------------------------
 ------------MOD CODE END----------------------
